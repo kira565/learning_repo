@@ -1,0 +1,24 @@
+//The common values for the display property:
+//** none, block, inline, inline-block, flex, grid, table, table-row, table-cell, list-item.
+
+.css {
+  display: none; //Does not diplay elem, elem doesnt not longer affects layout of document
+  // all children allso no longer displayed. Document renders as if element did not exist in the tree
+  display: block; // Element consumes whole line in the block direction (usually horizontal)
+
+  display: inline; // Elements can be laid out besides each other (распологать рядом друг с другом)
+
+  display: inline-block; //Similar to inline, but allows some block properties like setting width and height.
+
+  display: flex; //Behalves as block-level flex container, can be manupulated with flexbox model
+
+  display: grid; // Behalves as block-level grid container using grid layout
+
+  display: table; //behalves like <table> element
+
+  display: table-row; // behalves like <tr> element
+
+  display: table-cell; // behalves like <td> element
+
+  display: list-item; // behalves like <li> element
+}

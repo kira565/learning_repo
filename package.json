@@ -1,0 +1,15 @@
+{
+  "name": "forntend_preparations",
+  "version": "1.0.0",
+  "main": "index.ts",
+  "license": "MIT",
+  "scripts": {
+    "start": "tsc && node src/index.js"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.2"
+  },
+  "dependencies": {
+    "typescript": "^5.4.5"
+  }
+}
