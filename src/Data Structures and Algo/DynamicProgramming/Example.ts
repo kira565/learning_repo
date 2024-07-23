@@ -50,7 +50,3 @@ function fibonachiGraph(n: number) {
   }
   return b;
 }
-
-console.log(fibonachi(10), iterationsNotCached); // 177 func calls
-console.log(cachedFibonachi(10, new Map()), iterationsCached); // 19 func calls
-console.log(fibonachiGraph(10), iterationsGraph); // 9 iterations ! O(n)
