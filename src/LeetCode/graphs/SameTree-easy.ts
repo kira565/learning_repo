@@ -2,17 +2,7 @@ import {
   QueueByList,
   Stack,
 } from "../../Data Structures and Algo/StackAndQueue";
-
-export class TreeNode {
-  val: number;
-  left: TreeNode | null;
-  right: TreeNode | null;
-  constructor(val?: number, left?: TreeNode | null, right?: TreeNode | null) {
-    this.val = val === undefined ? 0 : val;
-    this.left = left === undefined ? null : left;
-    this.right = right === undefined ? null : right;
-  }
-}
+import { TreeNode } from "../Trees/tree-node";
 
 export function isSameTree(p: TreeNode | null, q: TreeNode | null): boolean {
   const queueP = new QueueByList<TreeNode | null>();
