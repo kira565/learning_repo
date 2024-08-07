@@ -18,6 +18,7 @@
 
 //* Examples:
 // Reading file sync (block program until file is read)
+//@ts-ignore
 const fs = require("fs");
 const data = fs.readFileSync("large-file.txt", "utf8");
 console.log(data); // Execution is blocked until the file is read.

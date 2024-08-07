@@ -33,7 +33,7 @@
 // such as callbacks passed to web API( eg setTimeout or setInterval), //! это колбеки которые переданы в веб апи
 // and also user interface event handlers lkke clicks ,scrolls, etc
 
-//! Microtask queue
+//! Microtask queue (then,catch,finally,await,queueMicrotask(), MutationObserver())
 
 // Microtasks are tasks that have a higher prority than macrotasks and are executed
 // immediately, after the currently executing script is completed and before the next
@@ -44,16 +44,56 @@
 // todo queueMicriotask() and MutationObserver callback
 
 //* EVENT LOOP ORDER:
+//! Priority: sync code > microtasks > macrotasks
 
 // 1. THE JS Engine starts executing scripts, placing synchronous operations on the call stack.
 
-// 2. When an asynchronous operation is encountered (eg setTimeout()), it is offloaded to the
-// respective Web API aor Node APU to handle the operation in the background
+// 2. When an asynchronous operation is encountered(когда сталкивается с асинх операцией) (eg setTimeout()), it is offloaded to the
+// respective Web API or Node API to handle the operation in the background
 
 // 3. Once the async operation completes, its callback function is placed in the respective queues -
 // also known as macrotask queue / callback queue OR microtask queue.
 
-// 4. The event loop continuosly monitors the call stack and executes items on the call stack
+// 4. The event loop continuosly monitors the call stack and executes items on the call stack.
+
 // If / when callstack is empty:
 // 1. Microtask queue is processed. The event loop takes the first callback from microtask
-// queue and pushes it to the call stack for execution.
+// queue and pushes it to the call stack for execution. This repeats until microtask queue is empty.
+
+// 2. Macrotask queue is processed. The event loop deaueues the first callback from macrotask queue and
+// pushes it onto callstack for execution. However, after macrotask queue is processed, the event loop
+// doesnt proceed with the next amcrotask yet! The event loop first checks the microtask queue. Checking the microtask queue
+// is necessary as microtasks have higher priority than amcrotasks queue callbacks. The amcrotask queue callback that was
+// just executed could have added more microtasks! (Только что выполненный колбек макротаск мог добавить больше микрозадач)
+// 1. If the microtask queue is non-empty, process them as per the previous step
+// 2. If the microtask queue is empty, the next macrotask queue callback is processed. This repeats until the macrotask
+// queue is empty
+
+// 5. This Process continues indenfinetly (процесс продолжается бесконечно), allowing JavascriptEngine to handle both sync and async
+// operations efficently without blocking the call stack
+console.log("Start");
+
+setTimeout(() => {
+  console.log("Timeout 1");
+}, 0);
+
+Promise.resolve().then(() => {
+  console.log("Promise 1");
+});
+
+setTimeout(() => {
+  console.log("Timeout 2");
+}, 0);
+
+console.log("End");
+
+// Console output:
+// Start
+// End
+// Promise 1
+// Timeout 1
+// Timeout 2
+
+// Start End - first - cuz they are part of initial script (sync)
+// Promise 1 - is logged next because promises and microtasks are executed immidiately after the item on the call stack
+// Timeout1 and Timeout2 are logged last because they are amcrotasks and are processed after microtasks
