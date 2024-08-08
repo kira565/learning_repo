@@ -69,3 +69,85 @@ onmessage = function (event) {
 // postMessage()
 
 // 5. The main scripts listens for messages from worker using onmessage
+
+//* Service Workers
+// 1. Act as network proxy between web app, browser and network
+// 2. Can intercept and handle network request, cache recources
+// 3. Enable offline functionality and push notification
+// 4. Have a lifecycle managed by the browser (install, activate, update)
+// 5. No access to DOM and main thread resources for security
+
+//* Service workers can be used for:
+// 1. Caching
+// 2. Offline support
+// 3. Request handling
+// 4. Background sync
+
+//* Creating a service worker
+// main.js
+
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker
+    .register("/service-worker.js")
+    .then(function (registration) {
+      console.log("Service Worker registered:", registration);
+    })
+    .catch(function (err) {
+      console.log("Service Worker registration failed:", err);
+    });
+}
+
+//service-worker.js (service worker script)
+self.addEventListener("fetch", function (event: any) {
+  // FetchEvent type
+  event.respondWith(
+    caches.match(event.request).then(function (response) {
+      // return cached response if available
+      if (response) {
+        return response;
+      }
+
+      // Otherwise, fetch from network
+      return fetch(event.request);
+    })
+  );
+});
+
+// In this example:
+// 1. The main script registers a service worker at /service-worker.js
+// 2. The service worker listens for the fetch() event, which is fired whenever the browser makes a network
+// request
+// 3. The service worker first checks if the requested resource is cached using caches.match(event.request)
+// 4. If it is, it returns the cached response. Otherwise, it fetches the resource from the network using
+// fetch(event.request)
+
+//* Shared Workers
+// Can be accessed from multiple scripts in different windows/tabs/iframes.
+// ALlow data sharing between browser contexts via messaging interface
+// Similar to dedicated web workers but with a broader scope
+
+//* Use cases for shared workers
+// State sharing across multiple windows
+
+//todo BONUS
+//* Worklets
+
+// The Worklet interface is a lightweight version of Web Workers and gives developers access to low-level
+// parts of the rendering pipeline. With Worklets, you can run JS and WebAssembly code to do graphics
+// rendering or audio processing where high performance is required
+
+//! Considerations and limitations
+
+// 1. Same origin policy
+// Workers must comply with the same origin policy, meaning the script that creates the worker and
+// the worker script itself must be from the same origin
+
+// 2. No DOM Access
+// Workers do not have direct access to the DOM. They can communicate with the main thread through messages
+
+// 3. Performance
+// Creating and managing workers incurs(берет на себя) overhead. They should be used judiciously(разумно)
+// for tasks that truly benefit from parallel execution
+
+// 4. Error handling
+// Proper error handling mechanism should be in place to handle any issues within the worker scripts.

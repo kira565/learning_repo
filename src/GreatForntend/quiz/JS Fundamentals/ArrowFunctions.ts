@@ -37,3 +37,36 @@ console.log(greeting()); // "Hello there!"
 function greeting() {
   return "Hello there!";
 }
+
+//! Стрелочные функции предоставляют доступ к среде где они были ОПРЕДЕЛЕНЫ, обычные - к среде где они
+//! были ВЫЗВАНЫ
+
+const globalObject: any = this;
+
+globalObject.whoIsThis = "TOP"; // Identify this scope
+
+// 1) Defining
+const fancyObj: any = {
+  whoIsThis: "FANCY", // Identify this object
+  regularF: function () {
+    console.log("regularF", this.whoIsThis);
+  },
+  arrowF: () => {
+    console.log("arrowF", (this! as any).whoIsThis);
+  },
+};
+
+// 2) Calling
+console.log("TOP-LEVEL", globalObject.whoIsThis); // It's "TOP" here
+
+//! IMPORTANT с одной стороны может показаться что стрелочная функция создана в скоупе объекта
+//! НО ЛИТЕРАЛ ОБЪЕКТА НЕ ЯВЛЯЕТСЯ СКОУПОМ, поэтому функция и берет PARENT SCOPE чем является в данном случае
+//! GLOBAL SCOPE
+
+fancyObj.regularF(); //! Output #1 (Fancy) REGULAR FUNCTION will always use this to represent who called it
+//! In this case it is fancyObject
+fancyObj.arrowF(); //! Output #2 (Top) ARROW FUNCTION TOOK this FROM global object, because
+//!  it was available at the time it was defined
+
+fancyObj.regularF.call({ whoIsThis: "FAKE" }); // Output #3 (Fake)
+fancyObj.arrowF.call({ whoIsThis: "FAKE" }); // Output #4 (Top)
