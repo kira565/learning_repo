@@ -1,5 +1,10 @@
 //* What are the pros and cons of using Promises insted of callbacks
 
+// Promise - is an object that may produce a single value sometime in the future:
+// either a resolved value or a resont that its not resolved. Promise may be in one of
+// 3 possible states: fulfilled, rejected or pending. Promise users can attach callbacks to handle
+// the fuldilled value or the reason of rejection.
+
 //* Pros:
 
 // 1. Avoid callback hell which can be unreadable

@@ -38,8 +38,12 @@ parent1.addEventListener(
   true // Set third argument to true for capturing
 );
 
+parent1.onclick = () => {
+  console.log("Hi"); // 2
+};
+
 child.addEventListener("click", () => {
-  console.log("Child element clicked"); //2
+  console.log("Child element clicked"); //3
 });
 
 // When click button it will trigger the parent element capturing handler first, followed by the child element

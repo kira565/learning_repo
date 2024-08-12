@@ -1,5 +1,8 @@
 // * Understanding JavaScript Closures
 
+//Closure is when a function is able to remember and access its lexical scope even when
+// that function is executing outside its lexical scope
+
 // In JavaScript, a closure is a function that captures the lexical scope in which it was declared,
 // allowing it to access and manipulate variables from an outer scope even after that scope has
 // been closed
@@ -78,3 +81,18 @@ function Counter() {
 // 4. Module patterns:
 // Closures enable the module pattern in JavaScript, allowing the creation of modules with private
 // and public parts
+
+class A {
+  f: Function;
+  constructor() {
+    this.f = () => this;
+  }
+}
+
+class B {
+  constructor(a: any) {
+    console.log(a.f());
+  }
+}
+
+new B(new A());
