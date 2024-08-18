@@ -96,3 +96,47 @@ class B {
 }
 
 new B(new A());
+
+//todo Classic Interview question 1
+// 1 What will the following code output?
+for (var i = 0; i < 3; i++) {
+  // замыкание (к моменту запуска таймера переменная i уже равна 10)
+  setTimeout(function () {
+    alert(i);
+  }, 1000 + i);
+}
+// 3,3,3
+//Переменная var – одна на все итерации цикла и видна даже после цикла.
+// так как var существует в одном экземпляре на все итерации и она просто переписывается вот мы и получим к концу
+// первого сет таймаута 3
+// с let все иначе - так как у нее блочная видимость на каждый цикл будет свой let 0,1,2 как и ожидалось
+//! у каждой итерации свой let в отличае от var
+
+//todo Classic Interview question 2
+// here need to implement curry
+// but simplier than in greatfrontend
+
+function curry(summ: number) {
+  return (plus: number) => {
+    summ += plus;
+    return summ;
+  };
+}
+
+//todo Classic Interview question 3
+// use closure to create private counter
+
+function counterClosure() {
+  let counter = 0;
+
+  return {
+    add: () => {
+      // ++ before means value of expression is the final value
+      return ++counter;
+    },
+    retrieve: () => {
+      // idk why just to show value?
+      return counter;
+    },
+  };
+}

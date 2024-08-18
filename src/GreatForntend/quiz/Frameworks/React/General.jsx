@@ -1,6 +1,8 @@
 // React is the library for web and native user interfaces
 
 // ReactComponents are the JavaScript functions that return markup
+// JSX is a syntax extension for JavaScript that lets you write 
+// HTML-like markup inside a JavaScript file.
 function MyButton() {
   return; <button>I'm a button</button>;
 }

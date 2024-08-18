@@ -62,6 +62,7 @@ console.log("TOP-LEVEL", globalObject.whoIsThis); // It's "TOP" here
 //! IMPORTANT с одной стороны может показаться что стрелочная функция создана в скоупе объекта
 //! НО ЛИТЕРАЛ ОБЪЕКТА НЕ ЯВЛЯЕТСЯ СКОУПОМ, поэтому функция и берет PARENT SCOPE чем является в данном случае
 //! GLOBAL SCOPE
+//! But clases are functional scope so arrow function in class use this as brand new object
 
 fancyObj.regularF(); //! Output #1 (Fancy) REGULAR FUNCTION will always use this to represent who called it
 //! In this case it is fancyObject

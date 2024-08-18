@@ -26,3 +26,101 @@
 
 //6. If the function is arrow function, it ignores all the rules above and receives the
 // this value of its surrounding scope at the time it is created.
+
+//todo basic interview Tasks:
+
+// Implement map
+interface Array<T> {
+  myMap<U>(
+    callbackFn: (value: T, index: number, array: Array<T>) => U,
+    thisArg?: any
+  ): Array<U>;
+}
+
+//@ts-ignore
+Array.prototype.myMap = function (callbackFn: Function, thisArg: any) {
+  const len = this.length;
+  const array = new Array(len);
+
+  for (let k = 0; k < len; k++) {
+    // Ignore index if value is not defined for index (e.g. in sparse arrays).
+    if (Object.hasOwn(this, k)) {
+      array[k] = callbackFn.call(thisArg, this[k], k, this);
+    }
+  }
+
+  return array;
+};
+// thisArg is the native array method, it binds this to callback
+[1, 2, 3, 4].map(
+  function (this: any, el) {
+    this.a;
+    return 1;
+  },
+  { a: 5, b: 6 } // thisArg
+);
+// but in case of arrow function it useless:
+[1, 2, 3, 4].map(
+  (el) => {
+    console.log(this); // undefined global this
+  },
+  { a: 20 }
+);
+
+// todo implement Filter
+interface Array<T> {
+  myFilter(
+    callbackFn: (value: T, index: number, array: Array<T>) => boolean,
+    thisArg?: any
+  ): Array<T>;
+}
+//@ts-ignore
+Array.prototype.myFilter = function (callbackFn: Function, thisArg: any) {
+  const len = this.length;
+  const results = [];
+
+  for (let k = 0; k < len; k++) {
+    const kValue = this[k];
+    if (
+      // Ignore index if value is not defined for index (e.g. in sparse arrays).
+      Object.hasOwn(this, k) &&
+      callbackFn.call(thisArg, kValue, k, this)
+    ) {
+      results.push(kValue);
+    }
+  }
+
+  return results;
+};
+
+interface Array<T> {
+  myReduce<U>(
+    callbackFn: (
+      previousValue: U,
+      currentValue: T,
+      currentIndex: number,
+      array: T[]
+    ) => U,
+    initialValue?: U
+  ): U;
+}
+//@ts-ignore
+Array.prototype.myReduce = function (callbackFn: Function, initialValue: any) {
+  const noInitialValue = initialValue === undefined;
+  const len = this.length;
+
+  if (noInitialValue && len === 0) {
+    throw new TypeError("Reduce of empty array with no initial value");
+  }
+
+  let acc = noInitialValue ? this[0] : initialValue;
+  let startingIndex = noInitialValue ? 1 : 0;
+
+  for (let k = startingIndex; k < len; k++) {
+    if (Object.hasOwn(this, k)) {
+      acc = callbackFn(acc, this[k], k, this);
+    }
+  }
+
+  return acc;
+};

@@ -1,3 +1,4 @@
+//@ts-nocheck
 //* Prototypical inheritance in Javascript;
 
 // Prototypical inheritance is a feature in JS used to create objects that inherit
@@ -138,3 +139,95 @@ animal.describe = function () {
 };
 
 animal.describe(); // "Name of the animal is Rocky"
+
+//todo  __proto__ vs prototype
+
+//* __proto__ -
+// Is a property of Object.prototype
+// It is exposes the hidden [[Prototype]] property of an object and allows
+// to access or modify prototype(parent) of the object. //! It is deprecated
+
+const obj1 = {
+  sayHi(this: any) {
+    console.log(`Hello im ${this.name}`);
+  },
+};
+const obj2 = {
+  name: "Jhon",
+};
+
+//! Old Deprecated way
+console.log(obj2.__proto__); // Object.prototype
+obj2.__proto__ = obj;
+console.log(obj2.__proto__); // {sayHi: f}
+
+//* New Way good approach
+console.log(Object.getPrototypeOf(obj2)); // Object.prototype
+Object.setPrototypeOf(obj2, obj1);
+console.log(Object.getPrototypeOf(obj2)); // obj
+
+obj2.sayHi(); // hello im Jhon
+
+// todo Object.defineProperty - Property configurator
+//this is the method that allows t odefine new poperties or modify existing ones.
+// Method takes three parameters : object we want to define the property on,
+// property name, and descriptor
+
+const object = {};
+Object.defineProperty(obj, "name", {
+  value: "Kirill",
+  writable: true,
+  enumerable: true,
+  configurable: true,
+});
+//! BY DEFAULT PROPERTIES CREATED WITH THIS FUNCTION ARE NOT WRITEABLE,
+//! NOT ENUMERABLE AND NOT CONFIGURABLE
+
+//? configurable
+// when set to false:
+// 1 type of property cannot be changed
+// 2 property may not be deleted
+// 3 other attributes of its descriptor cannot be changed
+//? enumberable
+// property is enumerable during enumerations only while true
+//? writeable
+// property may be changed with an assigment operator.
+
+//* .prototype
+// Is a psecial property that allmost all functions have (except arrow).
+// Thats is only used when a function is invoked as a constructor function.
+
+// The .prototype contains a refference to an object and when a constructor
+// is used to creaate a new object, .prototype is set as the prototype
+// of new the object
+
+function ObjectFactory() {
+  this.property = "Hi iam property!";
+}
+
+let obj3 = new ObjectFactory();
+
+console.log(ObjectFactory.prototype === Object.getPrototypeOf(obj3)); //true
+// or
+console.log(ObjectFactory.prototype.isPrototypeOf(obj3)); // true
+
+//! so basically object __proto__ has reference to the same object as .prototype
+//! of constructor function that was used to create this object
+
+// todo Object.freeze()
+// static method freezes an object. Freezing prevent extensions and makes existing props
+// non-writeable and non configurable. A frozen object can no longer be changed:
+// new properties cannot be added, existing properties cannot be removed,
+// their enumerability, configurability, writability, prototype cannot ve changeed or
+// reassigned. This is the highest integrity level that possible in JS.
+const obj = {
+  prop: 42,
+};
+
+Object.freeze(obj);
+
+obj.prop = 33;
+// Throws an error in strict mode
+
+console.log(obj.prop);
+// Expected output: 42

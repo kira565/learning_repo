@@ -10,7 +10,7 @@
 // ! This approach uses closures and setInterval
 
 function customSetInterval(callback: Function, interval: number) {
-  let ids: number[] = []; // closure memorized
+  let ids: NodeJS.Timeout[] = []; // closure memorized
 
   (function recursiveSetTimeout() {
     const id = setTimeout(() => {
@@ -34,7 +34,7 @@ setTimeout(() => clear(), 5000);
 //! THIS IS MY UPDATED APPROACH
 //* my approach to not use array because its not need, timeout is calnceled after its completed
 function customSetIntervalBetter(callback: Function, interval: number) {
-  let idClosure: number | null = null;
+  let idClosure: NodeJS.Timeout | null = null;
 
   (function recursiveSetTimeout() {
     const id = setTimeout(() => {
@@ -44,7 +44,11 @@ function customSetIntervalBetter(callback: Function, interval: number) {
     idClosure = id;
   })();
 
-  return () => idClosure && clearTimeout(idClosure);
+  return () => {
+    if (idClosure) {
+      clearTimeout(idClosure);
+    }
+  };
 }
 
 const clear2 = customSetIntervalBetter(() => {
@@ -66,7 +70,7 @@ interface Window {
 }
 
 function customSetIntervalWindow(window: Window) {
-  const intervalIds = new Map<number, number>();
+  const intervalIds = new Map<number, NodeJS.Timeout>();
 
   window.customSetInterval = function (
     handler: Function,

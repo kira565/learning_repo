@@ -38,12 +38,10 @@ function cachedFibonachi(n: number, cache: Map<number, number>): number {
 }
 
 // Третий вариант снизу вверх пиздец ну и ебаловка
-let iterationsGraph = 0;
 function fibonachiGraph(n: number) {
   let a = 1;
   let b = 1;
   for (let i = 2; i < n + 1; i++) {
-    iterationsGraph++;
     const atemp = b;
     b = a + b;
     a = atemp;

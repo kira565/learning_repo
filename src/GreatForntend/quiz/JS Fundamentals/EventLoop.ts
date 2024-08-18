@@ -26,7 +26,7 @@
 // These APIs are not part of Javascript engine and run on separate threads, allowing them to
 // execute concurrently without blocking the call stack
 
-//! Task queue / Mactotask queue / Callback queue
+//! Task queue / Mactotask queue / Callback queue (setTimeout/Interval callbacks, event handlers like clicks etc)
 
 // The task queue, also known as the macrotask queue / callback queue / event queue, is a queue
 // that holds tasks that need to be executed. These tasks are typically asynchronous operations,
@@ -97,3 +97,119 @@ console.log("End");
 // Start End - first - cuz they are part of initial script (sync)
 // Promise 1 - is logged next because promises and microtasks are executed immidiately after the item on the call stack
 // Timeout1 and Timeout2 are logged last because they are amcrotasks and are processed after microtasks
+
+//* Typical tasks Event Loop
+
+//1 EPAM
+
+console.log(4);
+const promise = new Promise((res, ref) => {
+  console.log(3);
+  setTimeout(() => {
+    console.log(1);
+    res(6);
+    console.log(2);
+  });
+  console.log(5);
+});
+
+promise.then((val) => {
+  console.log(val);
+});
+
+// 4, sync
+// 3, sync
+// 5, sync
+// microtask queue is empty added macrotask setTimeout callback
+// 1 code in macrotask processing
+// 2 code in macrotask processing
+// 6 microtask processed
+
+//* 2 Easy Event Loop question
+console.log(1);
+
+setTimeout(function () {
+  console.log(2);
+}, 0);
+
+Promise.resolve()
+  .then(function () {
+    console.log(3);
+  })
+  .then(function () {
+    console.log(4);
+  });
+
+// 1, 3, 4, 2
+
+// * 3 InterMedium Event Loop question
+console.log("begins");
+
+setTimeout(() => {
+  console.log("setTimeout 1");
+  Promise.resolve().then(() => {
+    console.log("promise 1");
+  });
+}, 0);
+
+new Promise(function (resolve, reject) {
+  console.log("promise 2");
+  setTimeout(function () {
+    console.log("setTimeout 2");
+    resolve("resolve 1");
+  }, 0);
+}).then((res) => {
+  console.log("dot then 1");
+  setTimeout(() => {
+    console.log(res);
+  }, 0);
+});
+
+// begins, sync
+// promise 2, sync
+// setTimeout 1, macro (this macro added micro promise 1)
+// promise 1 micro
+// setTimeout2 macro (created micro do then 1)
+// do then 1 micro
+// resolve 1 macro
+
+//* 3 Adnvanced Event Loop Question
+
+async function async1() {
+  console.log("async1 start");
+  await async2();
+  //? await puts things below to microtask queue so skip for now
+  console.log("async1 end");
+}
+
+async function async2() {
+  console.log("async2"); // ! only this mistake i made,
+  // this code will be executed immidiately afer async 1 start
+  // becase its also sync
+}
+
+console.log("script start");
+
+setTimeout(function () {
+  console.log("setTimeout");
+}, 0);
+
+async1();
+
+new Promise<void>(function (resolve) {
+  console.log("promise1");
+  resolve();
+}).then(function () {
+  console.log("promise2");
+});
+
+console.log("script end");
+
+// script start
+// async1 start
+// async 2
+// promise 1 sync
+// script end sync micro[2], macro[1]
+// async 1 end
+// promise 2
+// setTimeout

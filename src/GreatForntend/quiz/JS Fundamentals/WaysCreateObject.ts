@@ -97,3 +97,24 @@ const person7 = new Person3("Alice", 25);
 
 person6.greet(); // Output: Hello, my name is John and I'm 30 years old.
 person7.greet(); // Output: Hello, my name is Alice and I'm 25 years old.
+
+//* JS Object manipulations
+// 1 to create setter and getter for Object
+const obj = {
+  beer: "tuborg",
+  set setBeer(val: any) {
+    this.beer = val;
+  },
+  get getBeer() {
+    return this.beer;
+  },
+};
+
+console.log(obj.getBeer); // "tuborg"
+obj.setBeer = "karlsberg";
+console.log(obj.getBeer); // karlsberg
+
+// * To set private property to object (not enumerable) (or we can use Symbol)
+// any property defined by defineProperty method is not enumerable
+Object.defineProperty(obj, "privateField", { value: 5, enumerable: false });
+console.log(obj, Object.keys(obj)); // [beer, setBeer, getBeer]

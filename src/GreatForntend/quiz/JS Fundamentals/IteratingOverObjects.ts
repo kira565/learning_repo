@@ -56,11 +56,12 @@ arr.forEach((element, index) => {
   console.log(element, index);
 });
 
-//* For...of statement
+//* For...of statement (using symbol.iterator)
+//? there is additional information about iterators and generator functions
 
 // ES2015 introduces a new way to iterate, the for-of loop,
-// that allows you to loop over objects that conform to the iterable protocol such as
-// String, Array, Map, Set, etc. It combines the advantages of the for loop and the forEach()
+// that allows you to loop over objects that conform to the //!iterable protocol
+// such as String, Array, Map, Set, etc. It combines the advantages of the for loop and the forEach()
 // method. The advantage of the for loop is that you can break from it and the andvantage
 // of forEach that we dont need a counter variable.
 
@@ -78,3 +79,13 @@ const arr2 = ["a", "b", "c"];
 for (let [index, elem] of arr2.entries()) {
   console.log(index, ": ", elem);
 }
+
+//! Iterable protocol
+// allows JS objects to define or customize their iteration behavior
+// such as what values are looped over in a for...of construct.
+
+//? Some built-in types have default iterator behavior:
+// String, Array, TypedArray, Map, Set, Segments, DOM collections such as NodeList,
+// web APIS such as ReadableStream have built in Symbol.asyncIterator.
+
+//todo CHECK ITERATORS AND GENERATORS topic
