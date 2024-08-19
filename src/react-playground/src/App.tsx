@@ -5,8 +5,16 @@ function App() {
   return (
     <main className="w-screen h-screen p-8">
       <h2>React Playground</h2>
-      <div className="flex">
-        <Link to="/under-the-hood">React Under the hood</Link>
+      <div className="flex flex-col gap-2">
+        <div>
+          <Link to="/under-the-hood">React Under the hood</Link>
+        </div>
+        <div>
+          <Link to="/refs">React Refs</Link>
+        </div>
+        <div>
+          <Link to="/interactivity">Adding Interactivity</Link>
+        </div>
       </div>
     </main>
   );
