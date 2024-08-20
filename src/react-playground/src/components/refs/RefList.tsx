@@ -40,12 +40,9 @@ export const RefList: React.FC = () => {
                 const map = getMap();
                 if (node) {
                   map.set(cat, node);
-                }
-
-                return () => {
-                  // cleanup function
+                } else {
                   map.delete(cat);
-                };
+                }
               }}
             >
               <img className="" src={cat}></img>

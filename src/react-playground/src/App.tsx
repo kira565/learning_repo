@@ -15,6 +15,12 @@ function App() {
         <div>
           <Link to="/interactivity">Adding Interactivity</Link>
         </div>
+        <div>
+          <Link to="/performance">Performance</Link>
+        </div>
+        <div>
+          <Link to="/hooks">Hooks</Link>
+        </div>
       </div>
     </main>
   );

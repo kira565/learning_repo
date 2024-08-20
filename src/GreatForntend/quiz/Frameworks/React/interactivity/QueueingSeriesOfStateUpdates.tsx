@@ -142,6 +142,23 @@ const [number, setNumber] = useState(0);
 // Dont try to set state from inside of them or run other side effects, In strict mode,
 // React will run each updater function twice to find mistakes
 
+//? DEEP DIVE: USING UPDATER FUNCTION ---------------------------------------------------------------
+
+// Is using updater always preferred ?
+
+// There is recomendation to always write code like setAge(a => a + 1)
+// If the state we setting is calculated from previous state. There is no harm in it
+// but it also not always necessary
+
+// In most cases there is no difference between these two approaches.
+
+// If we prefer consistency over slightly more verbose syntax
+// It is reasonable to always write an updater if the state were setting is calculated from the
+// previous state. //! If its calculated from the previous state of some other state variable
+//! we might to combine them into one object and use a reducer!
+
+//? -------------------------------------------------------------------------------------------------
+
 // todo RECAP
 
 // 1. Setting state does not change the variable in the existing render, but it requests a new render

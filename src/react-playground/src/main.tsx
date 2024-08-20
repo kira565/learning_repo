@@ -6,6 +6,8 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { UnderTheHood } from "./components/UnderTheHoodPractice/UnderTheHood.tsx";
 import { ReactRefs } from "./components/refs/Root.tsx";
 import { Interactivity } from "./components/Interactivity/Root.tsx";
+import { PerformanceComponent } from "./components/performance/Root.tsx";
+import { Hooks } from "./components/hooks/Root.tsx";
 
 const router = createBrowserRouter([
   {
@@ -23,6 +25,14 @@ const router = createBrowserRouter([
   {
     path: "/interactivity",
     element: <Interactivity />,
+  },
+  {
+    path: "/performance",
+    element: <PerformanceComponent />,
+  },
+  {
+    path: "/hooks",
+    element: <Hooks />,
   },
 ]);
 

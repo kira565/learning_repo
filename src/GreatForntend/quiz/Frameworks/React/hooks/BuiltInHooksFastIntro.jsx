@@ -75,7 +75,6 @@ useLayoutEffect(() => {
 // Common way to optmize re-rendering performance is to skil unecessary 
 // work. Reuse cache calculation or skip re-render if the data has not changed
 
-//TODO
 //? useMemo - lets to cache result of an expensive calculation 
 //? useCallback - lets to cache a function definition before passing it down
 //? to an optimized component
