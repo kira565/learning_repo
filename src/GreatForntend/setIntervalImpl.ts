@@ -37,11 +37,10 @@ function customSetIntervalBetter(callback: Function, interval: number) {
   let idClosure: NodeJS.Timeout | null = null;
 
   (function recursiveSetTimeout() {
-    const id = setTimeout(() => {
+    idClosure = setTimeout(() => {
       callback();
       recursiveSetTimeout();
     }, interval);
-    idClosure = id;
   })();
 
   return () => {
@@ -96,3 +95,55 @@ function customSetIntervalWindow(window: Window) {
     }
   };
 }
+
+// Without mutating global of window object
+function customSetIntervalHook() {
+  const intervalIds = new Map<number, number>();
+
+  function customSetInterval3(
+    handler: Function,
+    delay?: number,
+    ...args: any[]
+  ): number {
+    const intervalId: number = Math.floor(Math.random() * 1000);
+
+    (function recursiveSetTimeout() {
+      const id = setTimeout(() => {
+        recursiveSetTimeout();
+        handler(...args);
+      }, delay);
+      intervalIds.set(intervalId, id);
+    })();
+
+    return intervalId;
+  }
+
+  function customClearInterval3(intervalId: number) {
+    if (intervalIds.has(intervalId)) {
+      clearTimeout(intervalIds.get(intervalId));
+      intervalIds.delete(intervalId);
+    }
+  }
+
+  return {
+    customSetInterval3,
+    customClearInterval3,
+  };
+}
+
+const { customSetInterval3, customClearInterval3 } = customSetIntervalHook();
+
+let counter = 0;
+const id = customSetInterval3(
+  (...args: any[]) => {
+    counter++;
+    console.log("TICK", counter, ...args);
+  },
+  1000,
+  1,
+  2
+);
+
+setTimeout(() => {
+  customClearInterval3(id);
+}, 10001);

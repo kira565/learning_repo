@@ -3,6 +3,7 @@ import { useState } from "react";
 export const QueueingOfUpdates: React.FC = () => {
   const [pending, setPending] = useState(0);
   const [completed, setCompleted] = useState(0);
+  const [timeoutNumber, setTimeoutnumber] = useState(0);
 
   async function handleEnqueue() {
     setPending(pending + 1);
@@ -29,7 +30,25 @@ export const QueueingOfUpdates: React.FC = () => {
       <h1>Queue of updates</h1>
       <div> Pending Items Count: {pending}</div>
       <div> Completed Items Count: {completed}</div>
+      <div> Increment Timeout number: {timeoutNumber}</div>
       <button onClick={handleEnqueue}>Enqueue Item</button>
+      <button
+        onClick={() => {
+          setTimeoutnumber((p) => p + 5);
+          setTimeout(() => {
+            alert(timeoutNumber); //* here we will have old value because it was taken from previous snapshot
+          }, 5000);
+
+          setTimeout(() => {
+            setTimeoutnumber((prev) => {
+              alert(prev); //* here we will see actual value, because updater function has actual value
+              return prev;
+            });
+          }, 3000);
+        }}
+      >
+        Increment Timeout
+      </button>
     </div>
   );
 };

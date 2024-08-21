@@ -21,6 +21,9 @@ function App() {
         <div>
           <Link to="/hooks">Hooks</Link>
         </div>
+        <div>
+          <Link to="/state-management">State management</Link>
+        </div>
       </div>
     </main>
   );

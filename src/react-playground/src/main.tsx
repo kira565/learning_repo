@@ -8,6 +8,7 @@ import { ReactRefs } from "./components/refs/Root.tsx";
 import { Interactivity } from "./components/Interactivity/Root.tsx";
 import { PerformanceComponent } from "./components/performance/Root.tsx";
 import { Hooks } from "./components/hooks/Root.tsx";
+import { StateManagement } from "./components/stateManagement/Root.tsx";
 
 const router = createBrowserRouter([
   {
@@ -33,6 +34,10 @@ const router = createBrowserRouter([
   {
     path: "/hooks",
     element: <Hooks />,
+  },
+  {
+    path: "/state-management",
+    element: <StateManagement />,
   },
 ]);
 
