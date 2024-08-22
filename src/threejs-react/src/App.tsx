@@ -1,5 +1,5 @@
 import "./App.css";
-import React, { useContext, useEffect, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { ThreeApp } from "./components/ThreeApp";
 import { AppControls } from "./components/AppControls";
 import * as THREE from "three";
