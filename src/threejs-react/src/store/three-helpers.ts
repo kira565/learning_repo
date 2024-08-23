@@ -1,5 +1,4 @@
 import * as THREE from "three";
-import { MapControls } from "three/addons/controls/MapControls.js";
 
 export interface InitialSceneProps {
   lights: THREE.Light[];
@@ -8,27 +7,35 @@ export interface InitialSceneProps {
 }
 
 export const getMesh = () => {
-  const planeGeometry = new THREE.PlaneGeometry(2000, 2000);
-  planeGeometry.rotateX(-Math.PI / 2);
-  const planeMaterial = new THREE.ShadowMaterial({
-    color: 0x000000,
-    opacity: 0.2,
-  });
+  const planeMesh = new THREE.Mesh(
+    new THREE.PlaneGeometry(20, 20),
+    new THREE.MeshBasicMaterial({
+      visible: false,
+    })
+  );
+  planeMesh.rotateX(-Math.PI / 2);
 
-  const mesh = new THREE.Mesh(planeGeometry, planeMaterial);
-  mesh.position.y = -200;
-  mesh.receiveShadow = true;
-
-  return mesh;
+  return planeMesh;
 };
 
 export const getGridHelper = () => {
-  const helper = new THREE.GridHelper(2000, 100);
-  helper.position.y = -199;
-  helper.material.opacity = 0.25;
-  helper.material.transparent = true;
-
+  const helper = new THREE.GridHelper(20, 20);
+  helper.name = "ground";
   return helper;
+};
+
+export const getHighlightedSquare = () => {
+  const hlMesh = new THREE.Mesh(
+    new THREE.PlaneGeometry(1, 1),
+    new THREE.MeshBasicMaterial({
+      side: THREE.DoubleSide,
+      color: "#fa0",
+    })
+  );
+  hlMesh.rotateX(-Math.PI / 2);
+  hlMesh.position.set(1, 0, 1);
+
+  return hlMesh;
 };
 
 export const getInitialLights = () => {
@@ -54,38 +61,14 @@ export const getIntitialSceneState = (): InitialSceneProps => {
   };
 };
 
-export const getThreeApp = (element: HTMLDivElement) => {
-  const scene = new THREE.Scene();
-  const renderer = new THREE.WebGLRenderer({ antialias: true });
-  renderer.setClearColor(0xf0ffff);
-  renderer.setSize(window.innerWidth, window.innerHeight);
-
-  element.appendChild(renderer.domElement);
-
-  const camera = getThreeCamera();
-
-  const controls = new MapControls(camera, renderer.domElement);
-  controls.enableDamping = true;
-  controls.mouseButtons = {
-    LEFT: THREE.MOUSE.PAN,
-    MIDDLE: THREE.MOUSE.DOLLY,
-    RIGHT: THREE.MOUSE.ROTATE,
-  };
-  controls.touches = {
-    ONE: THREE.TOUCH.PAN,
-    TWO: THREE.TOUCH.DOLLY_ROTATE,
-  };
-  return { renderer, camera, controls, scene };
-};
-
 export const getThreeCamera = () => {
   const camera = new THREE.PerspectiveCamera(
-    70,
+    60,
     window.innerWidth / window.innerHeight,
     1,
     10000
   );
-  camera.position.set(0, 250, 1000);
+  camera.position.set(0, 15, -22);
 
   return camera;
 };

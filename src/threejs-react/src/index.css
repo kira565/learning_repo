@@ -1,65 +1,87 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+  --warning-glow-rgb: 255, 102, 0;
+  --danger-glow-rgb: 255, 0, 0;
+  --gutter-size: 8px;
+  --border-glow-color: rgba(var(--color-glow-rgb), 0.7);
+  --glow-color: rgba(var(--danger-glow-rgb), 0.8);
+  --stripe-color: #f23;
+  --glow-size: 3px;
+  --stripe-size: 15px;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
+  --gutter-size: calc(var(--edge-size) * 0.35);
+  --gutter-d-size: calc(var(--edge-size) / 2);
 }
 
 body {
   margin: 0;
   min-height: 100vh;
 }
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
+@layer base {
+  html {
+    font-family: "RobotoCondensed", sans-serif;
   }
-  a:hover {
-    color: #747bff;
+  @font-face {
+    font-family: "RobotoCondensed";
+    src: local("RobotoCondensed-Regular"),
+      url("./assets/fonts/RobotoCondensed-Regular.ttf");
+    font-weight: 400;
   }
-  button {
-    background-color: #f9f9f9;
+
+  @font-face {
+    font-family: "RobotoCondensed";
+    src: local("RobotoCondensed-Bold"),
+      url("./assets/fonts/RobotoCondensed-Bold.ttf");
+    font-weight: 700;
+  }
+
+  @font-face {
+    font-family: "RobotoCondensed";
+    src: local("RobotoCondensed-SemiBold"),
+      url("./assets/fonts/RobotoCondensed-SemiBold.ttf");
+    font-weight: 600;
+  }
+
+  @font-face {
+    font-family: "Recharge";
+    src: local("Recharge-Bold") url("./assets/fonts/Recharge-Bolt.otf");
+  }
+
+  .warning {
+    @apply shadow-boardedShadowWarning;
+  }
+
+  .danger {
+    @apply shadow-boardedShadowDanger;
+  }
+
+  .piece {
+    @apply float-left mb-1 mr-1;
+  }
+
+  .label {
+    @apply inline-block uppercase whitespace-nowrap font-['RobotoCondensed'] text-3xl font-[400] p-1 tracking-[-1px];
+  }
+
+  .button-eva {
+    @apply uppercase whitespace-nowrap font-['RobotoCondensed'] text-xl tracking-[-1px] font-bold rounded-md border-2 border-solid border-evaTextWarning text-evaTextWarning p-1 hover:glowedWarning;
+  }
+
+  .decal {
+    @apply shadow-boxShadowDecal bg-repeatLinearGrad;
+  }
+
+  .glowedDanger {
+    --glow-color: rgba(var(--danger-glow-rgb), 0.5);
+    box-shadow: 0 0 10px 2px var(--glow-color);
+  }
+
+  .glowedWarning {
+    --glow-color: rgba(var(--warning-glow-rgb), 0.5);
+    box-shadow: 0 0 10px 2px var(--glow-color);
+    text-shadow: 0 0 10px 2px var(--glow-color);
   }
 }

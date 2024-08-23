@@ -4,6 +4,7 @@ import { ThreeApp } from "./components/ThreeApp";
 import { AppControls } from "./components/AppControls";
 import * as THREE from "three";
 import { ThreeContext, useThreeApp } from "./hooks/useTreeApp";
+import { getHighlightedSquare } from "./store/three-helpers";
 
 export interface Three {
   scene: THREE.Scene;
@@ -17,12 +18,11 @@ function App() {
   useEffect(() => {
     if (!ref.current || ref.current.childNodes.length > 0) return;
     ref.current.appendChild(app.renderer.domElement);
-    app.renderer.render(app.scene, app.camera);
   }, []);
 
   return (
     <React.Fragment>
-      <ThreeContext.Provider value={app}>
+      <ThreeContext.Provider value={{ app, threeContainer: ref }}>
         <AppControls />
       </ThreeContext.Provider>
       <ThreeApp ref={ref} />
