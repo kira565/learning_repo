@@ -4,6 +4,11 @@ export const QueueingOfUpdates: React.FC = () => {
   const [pending, setPending] = useState(0);
   const [completed, setCompleted] = useState(0);
   const [timeoutNumber, setTimeoutnumber] = useState(0);
+  let [mutateDirectlyNumber, setMutateNumber] = useState(0);
+
+  useState(() => {
+    console.log("REREDER");
+  });
 
   async function handleEnqueue() {
     setPending(pending + 1);
@@ -31,6 +36,7 @@ export const QueueingOfUpdates: React.FC = () => {
       <div> Pending Items Count: {pending}</div>
       <div> Completed Items Count: {completed}</div>
       <div> Increment Timeout number: {timeoutNumber}</div>
+      <div> Mutate State Directly number {mutateDirectlyNumber}</div>
       <button onClick={handleEnqueue}>Enqueue Item</button>
       <button
         onClick={() => {
@@ -48,6 +54,14 @@ export const QueueingOfUpdates: React.FC = () => {
         }}
       >
         Increment Timeout
+      </button>
+      <button
+        onClick={() => {
+          mutateDirectlyNumber++;
+          alert(mutateDirectlyNumber);
+        }}
+      >
+        Mutate state directly
       </button>
     </div>
   );

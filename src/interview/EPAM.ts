@@ -96,3 +96,6 @@ const obj = {
 //node.js
 
 //security supre fail xxs attacks etc
+
+//REST (REpresentational State Transfer) is a software architectural style that was created to guide the design
+// and development of the architecture for the World Wide Web.
