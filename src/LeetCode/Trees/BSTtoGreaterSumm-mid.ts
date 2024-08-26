@@ -1,5 +1,5 @@
-import { Stack } from "../../Data Structures and Algo/StackAndQueue";
-import { BinaryTreeNode } from "../../Data Structures and Algo/Trees/BinaryTree";
+import { Stack } from "../../DataStructuresAndAlgo/StackAndQueue";
+import { BinaryTreeNode } from "../../DataStructuresAndAlgo/Trees/BinaryTree";
 
 export function bstToGst(
   root: BinaryTreeNode<number> | null

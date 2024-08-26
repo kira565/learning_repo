@@ -1,4 +1,4 @@
-import { LinkedListImpl } from "../../../Data Structures and Algo/SinglyLinkedList";
+import { LinkedListImpl } from "../../../DataStructuresAndAlgo/SinglyLinkedList";
 
 class TaskHashTable {
   table: LinkedListImpl<{ val: string; index: number }>[] = [];
