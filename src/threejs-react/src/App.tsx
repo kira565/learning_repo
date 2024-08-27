@@ -3,8 +3,8 @@ import React, { useEffect, useRef } from "react";
 import { ThreeApp } from "./components/ThreeApp";
 import { AppControls } from "./components/AppControls";
 import * as THREE from "three";
-import { ThreeContext, useThreeApp } from "./hooks/useTreeApp";
-import { getHighlightedSquare } from "./store/three-helpers";
+import { useThreeApp } from "./hooks/useTreeApp";
+import { ThreeContext } from "./store/threeContext";
 
 export interface Three {
   scene: THREE.Scene;
@@ -16,8 +16,20 @@ function App() {
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (!ref.current || ref.current.childNodes.length > 0) return;
-    ref.current.appendChild(app.renderer.domElement);
+    const { renderer, camera } = app;
+
+    if (ref.current && ref.current.childNodes.length <= 0) {
+      ref.current.appendChild(renderer.domElement);
+    }
+
+    const onResize = () => {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    };
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
   }, []);
 
   return (

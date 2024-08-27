@@ -6,34 +6,37 @@ export interface InitialSceneProps {
   gridHelper: THREE.GridHelper;
 }
 
-export const getMesh = () => {
+export const getPlaneMesh = () => {
+  const geometry = new THREE.PlaneGeometry(1000, 1000);
+  geometry.rotateX(-Math.PI / 2);
   const planeMesh = new THREE.Mesh(
-    new THREE.PlaneGeometry(20, 20),
+    geometry,
     new THREE.MeshBasicMaterial({
       visible: false,
     })
   );
-  planeMesh.rotateX(-Math.PI / 2);
-
   return planeMesh;
 };
 
 export const getGridHelper = () => {
-  const helper = new THREE.GridHelper(20, 20);
+  const helper = new THREE.GridHelper(1000, 20);
   helper.name = "ground";
   return helper;
 };
 
 export const getHighlightedSquare = () => {
+  const geometry = new THREE.BoxGeometry(50, 50, 50);
+  geometry.translate(0, 0.5, 0);
+
   const hlMesh = new THREE.Mesh(
-    new THREE.PlaneGeometry(1, 1),
+    geometry,
     new THREE.MeshBasicMaterial({
-      side: THREE.DoubleSide,
       color: "#fa0",
+      name: "hl-mesh",
+      opacity: 0.5,
+      transparent: true,
     })
   );
-  hlMesh.rotateX(-Math.PI / 2);
-  hlMesh.position.set(1, 0, 1);
 
   return hlMesh;
 };
@@ -56,19 +59,20 @@ export const getInitialLights = () => {
 export const getIntitialSceneState = (): InitialSceneProps => {
   return {
     lights: getInitialLights(),
-    mesh: getMesh(),
+    mesh: getPlaneMesh(),
     gridHelper: getGridHelper(),
   };
 };
 
 export const getThreeCamera = () => {
   const camera = new THREE.PerspectiveCamera(
-    60,
+    45,
     window.innerWidth / window.innerHeight,
     1,
     10000
   );
-  camera.position.set(0, 15, -22);
+  camera.position.set(500, 800, 1300);
+  camera.lookAt(0, 0, 0);
 
   return camera;
 };
