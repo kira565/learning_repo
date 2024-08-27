@@ -1,2 +1,4 @@
 node_modules
-template-app
+DataStructuresAndAlgo/**/*.js
+GreatFrontend/**/*.js
+LeetCode/**/*.js

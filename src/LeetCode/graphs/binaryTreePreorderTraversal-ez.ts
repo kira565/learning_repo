@@ -1,4 +1,4 @@
-import { Stack } from "../../Data Structures and Algo/StackAndQueue";
+import { Stack } from "../../DataStructuresAndAlgo/StackAndQueue";
 
 class TreeNode {
   val: number;

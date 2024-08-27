@@ -6,7 +6,7 @@
 //еще одной структурой данных.
 //Это хэш-таблица, которая обеспечивает временную сложность .
 
-import { LinkedListImpl } from "../Data Structures and Algo/SinglyLinkedList";
+import { LinkedListImpl } from "../DataStructuresAndAlgo/SinglyLinkedList";
 
 //Хэш-таблица похожа на массив, потому что в ней тоже есть
 //операция индексации. В JavaScript доступ к элементу массива

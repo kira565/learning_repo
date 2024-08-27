@@ -1,6 +1,6 @@
 //https://leetcode.com/problems/binary-tree-postorder-traversal/
 
-import { Stack } from "../../../Data Structures and Algo/StackAndQueue";
+import { Stack } from "../../../DataStructuresAndAlgo/StackAndQueue";
 
 //Left-Right-Root
 

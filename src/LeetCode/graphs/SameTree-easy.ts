@@ -1,7 +1,4 @@
-import {
-  QueueByList,
-  Stack,
-} from "../../Data Structures and Algo/StackAndQueue";
+import { QueueByList, Stack } from "../../DataStructuresAndAlgo/StackAndQueue";
 import { TreeNode } from "../Trees/tree-node";
 
 export function isSameTree(p: TreeNode | null, q: TreeNode | null): boolean {

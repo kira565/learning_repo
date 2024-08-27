@@ -1,4 +1,4 @@
-import { QueueByList } from "../../Data Structures and Algo/StackAndQueue";
+import { QueueByList } from "../../DataStructuresAndAlgo/StackAndQueue";
 
 class _Node {
   val: number;
