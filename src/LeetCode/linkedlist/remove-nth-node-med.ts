@@ -19,14 +19,16 @@ function removeNthFromEnd(head: ListNode | null, n: number): ListNode | null {
   //keep reference to node wich is n steps back
   while (current !== null) {
     current = current.next;
-    n--;
-    if (nCounter < 0) {
+    nCounter--;
+    if (nCounter <= 0) {
       removingPrev = removing;
       removing = removing!.next;
     }
   }
-
-  console.log(removingPrev, removing, removing?.next);
-
+  if (removingPrev && removing) {
+    removingPrev.next = removing.next;
+  } else if (removing) {
+    head = removing.next;
+  }
   return head;
 }
