@@ -39,19 +39,38 @@
 
 // (()),(),()   ((),()),()     (),((),())       (),(),(())
 
-//
+//                                  () () () ()
 
-const s = "((()))";
+// ( () ) () () 1                    ( () () ) () - dupl           () ( () () )  4                () () ( () ) 5
+// ( () () ) () 2                                                  ( () () () ) - dupl           () ( () () ) - dupl
+// ( () () () ) 3
+
+// 2 - ((())) ()
+// 3 ( (()) () )
+
+// () () () ()
+
+// (() () () ()) (()()())() ()(()()()) ()(()())() _
+
+// () () () )()
+
 function generateParenthesis(n: number): string[] {
-  if (n < 1) return [];
-  const output: string[] = [];
-  const initial = Array(n).fill("()"); // ["()", "()", "()"] 3
-  console.log(initial);
+  //if (n < 1) return [];
+  //if (n === 1) return ["()"];
+  const output = new Set<string>();
+  const initial = Array(n).fill("()"); // ["()", "()", "()", "()"] 4
+  // ( () ) () ()
 
-  function buildQuery(current: string[]) {
-    // ""
-    // (()())
+  function buildQuery(currentScope: number, left: string[]) {
+    const str = left.join("");
+    if (output.has(str)) {
+      return;
+    } else {
+      output.add(str);
+    }
   }
 
-  return output;
+  buildQuery(0, initial);
+
+  return Array.from(output.values());
 }
