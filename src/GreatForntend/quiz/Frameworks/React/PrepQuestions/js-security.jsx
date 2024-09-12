@@ -7,6 +7,14 @@ const companyProfile = {
 // It will log a warning
 <a href={companyProfile.website}>More details</a>;
 
+//* JSX prevent injection XSS Attacks
+// React DOM escapes any values embedded in JSX before rendering them. It ensures that anything, that not explicity
+//written in our app can never be injected. Everything is converted to a string before being rendered.
+const name = response.potentiallyMaliciousInput;
+const element = <h1>{name}</h1>;
+//This way we can prevent XSS(Cross-site-scripting) attacks in the application.
+
+
 //* General JS Security best practices:
 
 //! 1 Outdated dependencies.
