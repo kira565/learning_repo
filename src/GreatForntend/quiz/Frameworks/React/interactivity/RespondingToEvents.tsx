@@ -63,7 +63,7 @@ export default function Toolbar() {
 
 //? DEEP DIVE: Capture phase events
 // Event Capturing - we described (its opposite operation to bubbling, it goes
-//from root to target and has higher priority, (it turns on after adding event listener )
+// from root to target and has higher priority, (it turns on after adding event listener )
 // in React we can add it like this:
 <div
   onClickCapture={() => {
@@ -99,7 +99,7 @@ export default function Signup() {
 // Unlike rendering functions, event handlers dont need to be pure,
 // so its a great place to change something - for example, change an inputs value
 // in response to typing, or change a list in response to a button press.
-// Hovewer, i norder to change some information, we first need to store It.
+// Hovewer, ni norder to change some information, we first need to store It.
 // In React, this is done by using //? state, "a component memory"
 
 //todo RECAP

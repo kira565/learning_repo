@@ -62,7 +62,7 @@ const MyInput = forwardRef(function MyInput(props, ref) {
 //? What is the impact of using the useImperativeHandle hook on component re-renders?
 //* It has no impact on component re-renders
 
-//? How does the useImperativeHandle hook handle the cleanup of exposed methods?
+//? How does the useImperativeHandle hook handle `the cleanup of exposed methods?
 //* It automatically cleans up exposed methods on component unmount
 
 //? What is the main difference between useImperativeHandle and useRef?
