@@ -167,3 +167,29 @@ const [index, setIndex] = useState(0);
 
 //7 State is private to the component. If you render it in two places,
 // each copy gets its own state.
+
+//? DEEP DIVE Controlled and uncontrolled components
+// It is common to call a component with some local state “uncontrolled”
+//For example, the original Panel component with an isActive state variable is uncontrolled
+//because its parent cannot influence whether the panel is active or not.
+
+// In conrast we might say that component is controlled when the important information
+// in it is driven by props rather than its own local state (пропсами а не состоянием).
+//This lets the parent  component fullt specify its behavior. The final Panel component
+// with the isActive prop is controlled by the Accordion component.
+
+// Uncontrolled components are easier to use within their parents because they require
+// less configuration. But they are less flexible when we want to coordinate them
+// together. COntrolled components are maximally flexible, but they require the parent
+// component to fully configure them with props.
+
+// In practice, controlled and uncontrolled arent strict technical terms -
+// each component usually has some mix of both local state and props. However,
+// this is a useful way to talk about how components are designed and what capabilities
+// they offer
+
+// When writting a component, consider which information in it should be controlled
+// via props, and which information should be uncontrolled (via state). But we can
+// always change our mind and refactor later
+
+//?-------------------------------------------------

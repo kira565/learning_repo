@@ -142,3 +142,12 @@ type Fiber = {
 // картинку в браузере он собирает эти иэменения  и отдает их в следующую фазу коммита
 
 //? хуки завязаны на том как работает файбер и стали возможны после файбера
+
+//? What is the main goal of React Fiber?
+// The goal is to increase suitability for areas like anumation, layout. Its headline
+// feature us uncremental rendering: the ability to split rendering works into chunks
+// and spread it out over multiple frames
+
+//? what is reconciliation
+// Reconciliation is the proccess through which React updates the Browser DOM and makes
+//

@@ -71,3 +71,34 @@ import { jsx as _jsx } from "react/jsx-runtime";
 function App() {
   return _jsx("h1", { children: "Good morning!!" });
 }
+
+
+// 
+//? JSX elements must be wrapped in an enclosing tag.
+//? What is this concept known as?
+// * Encapsulation
+//JSX elements must be wrapped in an enclosing tag, a concept similar to encapsulation in other programming languages.
+// It means adjacent JSX elements must be wrapped in an enclosing parent tag like these 2 duvs below wrapped in react fragment
+<React.Fragment>
+  <div>1</div>
+  <div>2</div>
+</React.Fragment>
+
+//* KEYS in React 
+// Rules of keys 
+// Keys must be unique among siblings. However, it’s okay to use the same keys for JSX nodes in different arrays.
+// Keys must not change or that defeats their purpose! Don’t generate them while rendering.
+//!Note about keys:
+//1. Using indexes for keys is not recomended if the order of items may change. this can cause performance issues
+//2. If this is component list provide key for component
+//3. key attribute accepts either string or number and convert it as string type
+//4. dont generate the key on the fly like using Math.random(), they will never match.
+
+
+
+//* inline condition expressions:
+messages.length > 0 && !isLogin ? (
+  <h2>You have {messages.length} unread messages.</h2>
+) : (
+  <h2>You don't have unread messages.</h2>
+);

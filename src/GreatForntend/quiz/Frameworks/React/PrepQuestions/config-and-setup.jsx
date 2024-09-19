@@ -150,3 +150,43 @@ const plugins = {
     }),
   ]
 }
+
+
+//? What is the purpose of Code SPlitting in React
+// * To reduce the initial loading time of the application
+// By splitting the code into smaller chunks that can be loaded on demand //( eg when 
+// particular route is accessed), it helps in decreasing size of the initial JS
+// payload that users need to download, leading to faster initial load
+
+//? How can you implement lazy loading of components in React?
+// * Using Reacr.lazy and Suspense 
+//todo
+
+//?How do you identify and address unnecessary re-renders in a React application?
+//* devtools react profiler, console logs, reviewing code
+
+
+//? What is the main purpose of using Jest in React applications?
+//*For unit and integration testing
+
+//?How does React Testing Library differ from enzyme in testing React components?
+//* React Testing Library focuses on rendering components and user interactions,
+// *  while enzyme focuses on internal component state and methods
+
+//? What is a best practice when writing tests for React components using React Testing Library?
+// * To focus on testing the component as users would interact with it
+
+
+//? How do you mock a module or function in Jest?
+//* Using jest.fn() and jest.mock()
+
+//?How do you test a component that fetches data from an API using React Testing Library?
+//*By mocking the fetch function and simulating a response
+
+//?What common issue should you be aware of when testing asynchronous behavior in React components?
+//*Tests completing before asynchronous operations
+
+//?How do you identify and resolve issues related to event handling in tests using React Testing Library?
+// * By ensuring the correct event types and payloads are used
+//* By manually triggering events in the component
+
