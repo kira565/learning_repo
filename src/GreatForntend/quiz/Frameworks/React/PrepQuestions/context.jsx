@@ -55,3 +55,28 @@ class App extends React.Component {
 }
 
 //! If you want to update context, use it with state (useState or useReducer) as described above.
+//? How can you dynamically change the value of a context in a component tree?
+//* By updating the state that's passed to the context provider's value prop
+// this approach allows the context value to be dynamic and responsive to state
+//changes within the component that renders the context provider. THis pattern is 
+// commonly used to ensure that context values remain up-to-date with app state
+
+//? How does the Context API help in avoiding "prop drilling"?
+
+// * By allowing components to subscribe to context changes directly
+
+//?  What is a potential drawback of using the Context API excessively?
+
+//* Difficultly in managing and tracking state changes
+// While its powerful for sharing data across components, overusing it can lead
+// to challenges in maintaining state, understanding where state changes are initiated,
+// and debugging as the context data flow is not as explicit or isolated as local 
+// components state managed by state management libraries. Moreover it can cause 
+// unecessary re-renders for components thhat are part of context consumers but they 
+// dont need this part of the state
+
+//? how we address a performance issue caused by unecessary re-renders in components 
+//? consuming a frequently updated context ?
+
+//* Splitting the context into multiple smaller contexts
+

@@ -54,6 +54,32 @@
 // e.currentTarget may not be the same e.nativeEvent.currentTarget. for polyfilled
 // events e.type may differ from e.nativeEvent.type
 
+//? Difference between HTML and REACT synthetic event handling
+// 1. In HTML, the event name usually represents in lowercase as a convention:
+//Whereas in React it follows camelCase convention:
+{/* <button onclick="activateLasers()"></button>
+<button onClick={activateLasers}> */}
+
+//2. In HTML, you can return false to prevent default behavior:
+//Whereas in React you must call preventDefault() explicitly:
+//html:
+<a
+  href="#"
+  onclick='console.log("The link was clicked."); return false;'
+/>
+//react
+function handleClick(event) {
+  event.preventDefault();
+  console.log("The link was clicked.");
+}
+//3 In HTML, you need to invoke the function by appending () Whereas in react you 
+//should not append () with the function name. (refer "activateLasers" function in the 
+//first point for example)
+
+
+
+//! To stop event propagation in React you should call the preventDefault method on the event object rather than returning false
+//* in some test they say that we can return false but its not true
 
 
 //! MORE CORE DESCR CHECK RESPONDING TO EVENTS FILE
@@ -97,3 +123,72 @@ createRoot(document.getElementById("root")).render(
         </Route>
       </Routes>
     </BrowserRouter>
+
+    //?  What does the component do in React Router?
+    // * It provides conditional logic for rendering components
+    // The component in React Router is used to render only the first route that
+    // matches the location. It provides conditional logic for rendering components
+    // ensuring that the only first matching route is rendered. THis particulary useful
+    // for defining exclusive routes and handling 404 pages
+
+    //? How do you navigate to a different URL using React Router?
+    // * Using the component  <Navigate to="/dashboard" replace={true} />
+
+  //? Styling links in React router 
+//   <Link to={to} unstable_viewTransition>
+//   <p
+//     style={{
+//       viewTransitionName: isTransitioning
+//         ? "image-title"
+//         : "",
+//     }}
+//   >
+//     Image Number {idx}
+//   </p>
+//   <img
+//     src={src}
+//     alt={`Img ${idx}`}
+//     style={{
+//       viewTransitionName: isTransitioning
+//         ? "image-expand"
+//         : "",
+//     }}
+//   />
+// </Link>
+
+
+//? How to define route parameter in React Router
+//* <Route path="/:id" />
+
+//? How can you programmatically navigate to a new route in React Router?
+// ! OLD approach:
+// * Using this.props.history.push('/new-route')
+//! NEW APPROACH
+// * useNavigate hook
+// *  const navigate = useNavigate();
+//*   navigate("/session-timed-out");
+
+//? NavLink - What is the use of the exact prop in a component?
+//! new version changed from exact to end <NavLink end />
+//* The end prop changes the matching logic for the active and pending states to only
+//* match to the "end" of the NavLink's to path. If the URL is longer than to, it will
+//*  no longer be considered active. EG
+//<NavLink to="/tasks" end />	 URL : /tasks	 isActive - true
+//<NavLink to="/tasks" end />	 URL : /tasks/123	 isActive - false (NOT MATCH)
+
+
+// * RefCallbacks 
+// We can pass refCallback instead of ref object, when we need to do something
+// with appeared element, for example to set focus, its also guarantee that
+// we perform this operation under element which is 100% exists, while ref.current can be 
+// null, so function will run only when element appears
+
+export function NewFormWithAutoFocus() {
+  const setFocus = useCallback((element) => {
+    element.focus()
+  })
+
+  return (
+    <input ref={setFocus}></input>
+  )
+}

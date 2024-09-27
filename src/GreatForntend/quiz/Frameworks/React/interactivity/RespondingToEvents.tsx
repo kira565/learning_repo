@@ -26,7 +26,9 @@ export default function Button() {
 // handleClick is a event handler.
 // They are usually defined inside component
 // They usually have name started with handle, followed by the name of event
-//!pitfall Functions must be passed, not called
+//! pitfall
+//! Functions must be passed, not called
+//! if func is called, The method will be called when the component renders, not when the button is clicked
 
 //! Note:
 // Make sure to use appropriate HTML elements for event handling

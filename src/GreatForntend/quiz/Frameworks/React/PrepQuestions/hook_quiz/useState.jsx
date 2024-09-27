@@ -30,3 +30,9 @@
 //? How many possible arguments can useState() take?
 //* only 1
 
+//? Identify the issue in this useState usage:
+const [count, setCount] = useState(0);
+setCount(count + 1);
+
+//* The state update should be inside a component or effect
+

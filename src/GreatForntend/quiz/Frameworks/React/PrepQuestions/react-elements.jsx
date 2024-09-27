@@ -54,3 +54,35 @@
 // Caveats 
 // You cannot pass both children and dangerouslySetInnerHTML at the same time.
 // Some events (like onAbort and onLoad) don’t bubble in the browser, but bubble in React.
+
+//? What is difference between Element and Component? 
+// An element is a plain object describing what we want to appear on the screen it
+// terms of the DOM nodes or other components. Elements can contain other Elements
+// in their props. Creating a React element is cheap. Once an element is created,
+// it cannot be mutated 
+
+// The JS representation (Withoutx JSX) of React Element would be as follows:
+const element = React.createElement("div", { id: "login-btn" }, "Login");
+// and this element cant be simplified using JSX
+<div id="login-btn">Login</div>
+// The above React.createElement() function returns an object as below
+const obj = {
+    type: 'div',
+    props: {
+      children: 'Login',
+      id: 'login-btn'
+    }
+  }
+  //Finally, this element renders to the DOM using ReactDOM.render().
+
+// Component can be declared in several ways: 1. class with render method
+// 2. defined as function. In either case, it takes props as an input, and returns
+// JSX tree as the output
+
+// Then JSX gets transpiled to a React.createElement() function tree:
+const Button = ({ handleLogin }) =>
+  React.createElement(
+    "div",
+    { id: "login-btn", onClick: handleLogin },
+    "Login"
+  );

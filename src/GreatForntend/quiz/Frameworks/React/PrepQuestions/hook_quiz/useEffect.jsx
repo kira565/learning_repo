@@ -67,3 +67,16 @@
 //? Is it safe to perform DOM manipulation inside the useEffect hook?
 //* It depends on the specific use case (eg addEventListeners are recommended to be used here, but 
 //* maybe we can avoid it using event handlers) so, for real DOM is ok, but for ReactDom its better to use react event handlers
+
+
+//? What does the useEffect hook replace in class components?
+//* componentDidMount, componentDidUpdate, and componentWillUnmount methods
+
+// TODO Fetch inside useEffect approach when we use fetch().then().then() without async await is it OK?
+
+
+//? What could cause an infinity loop in a component using useEffect?
+//1 Omitting the dependency array
+//2 Including a state variable that constantly changes within the dependency array
+
+
