@@ -13,7 +13,7 @@ class Form extends Component {
 
   static getDerivedStateFromProps(props, state) {
     // Any time the current user changes,
-    // Reset any parts of state that are tied to that user.
+    // Reset any parts of state that are tied to that user
     // In this simple example, that's just the email.
     if (props.userID !== state.prevUserID) {
       return {
