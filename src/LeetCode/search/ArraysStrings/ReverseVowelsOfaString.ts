@@ -26,15 +26,17 @@
 
 // 1 <= s.length <= 3 * 105
 // s consist of printable ASCII characters.
-
 function reverseVowels(s: string): string {
   let result = s.split("");
   let pointerA = 0;
   let pointerB = s.length - 1;
   const vowelSet = new Set(["a", "e", "i", "o", "u"]);
 
-  while (pointerA <= pointerB) {
-    if (vowelSet.has(s[pointerA]) && vowelSet.has(s[pointerB])) {
+  while (pointerA < pointerB) {
+    if (
+      vowelSet.has(s[pointerA].toLowerCase()) &&
+      vowelSet.has(s[pointerB].toLowerCase())
+    ) {
       const temp = result[pointerA];
 
       result[pointerA] = result[pointerB];
@@ -44,10 +46,10 @@ function reverseVowels(s: string): string {
       pointerB--;
     }
 
-    if (!vowelSet.has(s[pointerA])) {
+    if (!vowelSet.has(s[pointerA].toLowerCase())) {
       pointerA++;
     }
-    if (!vowelSet.has(s[pointerB])) {
+    if (!vowelSet.has(s[pointerB].toLowerCase())) {
       pointerB--;
     }
   }
