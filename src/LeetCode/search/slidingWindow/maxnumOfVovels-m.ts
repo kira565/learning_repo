@@ -10,6 +10,12 @@
 // Output: 3
 // Explanation: The substring "iii" contains 3 vowel letters.
 
+//! Constraints:
+
+// 1 <= s.length <= 105
+// s consists of lowercase English letters.
+// 1 <= k <= s.length
+
 function maxVowels(s: string, k: number): number {
   let summ = 0;
   let res = 0;

@@ -9,6 +9,7 @@ import { Interactivity } from "./components/Interactivity/Root.tsx";
 import { PerformanceComponent } from "./components/performance/Root.tsx";
 import { Hooks } from "./components/hooks/Root.tsx";
 import { StateManagement } from "./components/stateManagement/Root.tsx";
+import { TimerExample } from "./components/basic examples/TimerExamples.tsx";
 
 const router = createBrowserRouter([
   {
@@ -38,6 +39,10 @@ const router = createBrowserRouter([
   {
     path: "/state-management",
     element: <StateManagement />,
+  },
+  {
+    path: "/timer",
+    element: <TimerExample />,
   },
 ]);
 
