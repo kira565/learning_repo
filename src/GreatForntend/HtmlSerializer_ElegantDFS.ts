@@ -11,7 +11,6 @@ export default function serializeHTML(element: Element): string {
   function dfs(node: Element | string, level: number) {
     if (typeof node === "string") {
       resultingArray.push(addTag(node, level, false));
-      return;
     } else {
       resultingArray.push(addTag(node.tag, level, true, true)); // идем в глубину (открываем теги)
       node.children.forEach((child) => dfs(child, level + 1)); // go deeper (recursive dfs)
